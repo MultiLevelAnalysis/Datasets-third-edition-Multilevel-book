@@ -1,0 +1,449 @@
+Mplus VERSION 8
+MUTHEN & MUTHEN
+10/30/2017   4:08 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE:  Popularity data using Mplus, empty model
+  !   Note this setup will generate several errors/warnings that can be ignored;
+
+  DATA:
+    FILE IS "nurses.dat";
+
+  VARIABLE:
+    NAMES ARE hospital wardid nurse age gender experien stress wardtype hospsiz
+              expcon Cexpcon Chospsize;
+    USEVARIABLES ARE hospital wardid age gender experien stress wardtype Cexpcon Chospsize;
+    CLUSTER IS hospital wardid;
+    WITHIN ARE age experien gender;
+    BETWEEN ARE (wardid) cexpcon wardtype (hospital) chospsize;
+
+  ANALYSIS:
+    TYPE IS THREELEVEL RANDOM;
+    ESTIMATOR IS MLR; PROCESSORS=4;
+
+  MODEL:
+    %within%
+      stress ON age gender experien;
+
+    %between wardid%
+      stress ON wardtype;
+      ExpSlope | stress ON cexpcon;
+
+    %between hospital%
+      stress ExpSlope ON chospsize;
+
+  OUTPUT:  SAMPSTAT STDYX; CINTERVAL;
+
+
+
+*** WARNING in VARIABLE command
+  Note that only the first 8 characters of variable names are used in the output.
+  Shorten variable names to avoid any confusion.
+*** WARNING in OUTPUT command
+  STANDARDIZED (STD, STDY, STDYX) options are available only for TYPE=TWOLEVEL RANDOM
+  with ESTIMATOR=BAYES.  Request for STANDARDIZED (STD, STDY, STDYX) is ignored.
+   2 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+Popularity data using Mplus, empty model
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        1000
+
+Number of dependent variables                                    1
+Number of independent variables                                  6
+Number of continuous latent variables                            1
+
+Observed dependent variables
+
+  Continuous
+   STRESS
+
+Observed independent variables
+   AGE         GENDER      EXPERIEN    WARDTYPE    CEXPCON     CHOSPSIZ
+
+Continuous latent variables
+   EXPSLOPE
+
+Variables with special functions
+
+  Cluster variables     HOSPITAL  WARDID
+
+  Within variables
+   AGE         GENDER      EXPERIEN
+
+  Level 2 between variables
+   CEXPCON     WARDTYPE
+
+  Level 3 between variables
+   CHOSPSIZ
+
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Maximum number of iterations                                   100
+Convergence criterion                                    0.100D-05
+Maximum number of EM iterations                                500
+Convergence criteria for the EM algorithm
+  Loglikelihood change                                   0.100D-02
+  Relative loglikelihood change                          0.100D-05
+  Derivative                                             0.100D-03
+Minimum variance                                         0.100D-03
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-02
+Optimization algorithm                                         EMA
+
+Input data file(s)
+  nurses.dat
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of WARDID clusters            100
+     Number of HOSPITAL clusters           25
+
+     Average cluster size for WARDID level       10.000
+
+     Estimated Intraclass Correlations for the Y Variables for WARDID level
+
+                Intraclass
+     Variable  Correlation
+
+     STRESS       0.473
+
+     Average cluster size for HOSPITAL level       40.000
+
+     Estimated Intraclass Correlations for the Y Variables for HOSPITAL level
+
+                Intraclass
+     Variable  Correlation
+
+     STRESS       0.211
+
+
+SAMPLE STATISTICS
+
+NOTE:  The sample statistics for within and between refer to the
+       maximum-likelihood estimated within and between covariance
+       matrices, respectively.
+
+
+     ESTIMATED SAMPLE STATISTICS FOR WITHIN
+
+
+           Means
+              STRESS        AGE           GENDER        EXPERIEN      WARDTYPE
+              ________      ________      ________      ________      ________
+                0.000        43.005         0.735        17.057         0.000
+
+
+           Means
+              CEXPCON       CHOSPSIZ
+              ________      ________
+                0.000         0.000
+
+
+           Covariances
+              STRESS        AGE           GENDER        EXPERIEN      WARDTYPE
+              ________      ________      ________      ________      ________
+ STRESS         0.301
+ AGE           -0.386       144.855
+ GENDER        -0.084        -0.144         0.195
+ EXPERIEN      -0.887        59.265        -0.114        36.472
+ WARDTYPE       0.000         0.000         0.000         0.000         0.000
+ CEXPCON        0.000         0.000         0.000         0.000         0.000
+ CHOSPSIZ       0.000         0.000         0.000         0.000         0.000
+
+
+           Covariances
+              CEXPCON       CHOSPSIZ
+              ________      ________
+ CEXPCON        0.000
+ CHOSPSIZ       0.000         0.000
+
+
+           Correlations
+              STRESS        AGE           GENDER        EXPERIEN      WARDTYPE
+              ________      ________      ________      ________      ________
+ STRESS         1.000
+ AGE           -0.058         1.000
+ GENDER        -0.349        -0.027         1.000
+ EXPERIEN      -0.268         0.815        -0.043         1.000
+ WARDTYPE       0.000         0.000         0.000         0.000         0.000
+ CEXPCON        0.000         0.000         0.000         0.000         0.000
+ CHOSPSIZ       0.000         0.000         0.000         0.000         0.000
+
+
+           Correlations
+              CEXPCON       CHOSPSIZ
+              ________      ________
+ CEXPCON        0.000
+ CHOSPSIZ       0.000         0.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR BETWEEN WARDID
+
+
+           Means
+              STRESS        AGE           GENDER        EXPERIEN      WARDTYPE
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.500
+
+
+           Means
+              CEXPCON       CHOSPSIZ
+              ________      ________
+                0.000         0.000
+
+
+           Covariances
+              STRESS        AGE           GENDER        EXPERIEN      WARDTYPE
+              ________      ________      ________      ________      ________
+ STRESS         0.449
+ AGE            0.000         0.000
+ GENDER         0.000         0.000         0.000
+ EXPERIEN       0.000         0.000         0.000         0.000
+ WARDTYPE       0.013         0.000         0.000         0.000         0.250
+ CEXPCON       -0.175         0.000         0.000         0.000         0.000
+ CHOSPSIZ       0.000         0.000         0.000         0.000         0.000
+
+
+           Covariances
+              CEXPCON       CHOSPSIZ
+              ________      ________
+ CEXPCON        0.250
+ CHOSPSIZ       0.000         0.000
+
+
+           Correlations
+              STRESS        AGE           GENDER        EXPERIEN      WARDTYPE
+              ________      ________      ________      ________      ________
+ STRESS         1.000
+ AGE            0.000         0.000
+ GENDER         0.000         0.000         0.000
+ EXPERIEN       0.000         0.000         0.000         0.000
+ WARDTYPE       0.038         0.000         0.000         0.000         1.000
+ CEXPCON       -0.522         0.000         0.000         0.000         0.000
+ CHOSPSIZ       0.000         0.000         0.000         0.000         0.000
+
+
+           Correlations
+              CEXPCON       CHOSPSIZ
+              ________      ________
+ CEXPCON        1.000
+ CHOSPSIZ       0.000         0.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR BETWEEN HOSPITAL
+
+
+           Means
+              STRESS        AGE           GENDER        EXPERIEN      WARDTYPE
+              ________      ________      ________      ________      ________
+                5.001         0.000         0.000         0.000         0.000
+
+
+           Means
+              CEXPCON       CHOSPSIZ
+              ________      ________
+                0.000        -0.200
+
+
+           Covariances
+              STRESS        AGE           GENDER        EXPERIEN      WARDTYPE
+              ________      ________      ________      ________      ________
+ STRESS         0.200
+ AGE            0.000         0.000
+ GENDER         0.000         0.000         0.000
+ EXPERIEN       0.000         0.000         0.000         0.000
+ WARDTYPE       0.000         0.000         0.000         0.000         0.000
+ CEXPCON        0.000         0.000         0.000         0.000         0.000
+ CHOSPSIZ       0.220         0.000         0.000         0.000         0.000
+
+
+           Covariances
+              CEXPCON       CHOSPSIZ
+              ________      ________
+ CEXPCON        0.000
+ CHOSPSIZ       0.000         0.480
+
+
+           Correlations
+              STRESS        AGE           GENDER        EXPERIEN      WARDTYPE
+              ________      ________      ________      ________      ________
+ STRESS         1.000
+ AGE            0.000         0.000
+ GENDER         0.000         0.000         0.000
+ EXPERIEN       0.000         0.000         0.000         0.000
+ WARDTYPE       0.000         0.000         0.000         0.000         0.000
+ CEXPCON        0.000         0.000         0.000         0.000         0.000
+ CHOSPSIZ       0.710         0.000         0.000         0.000         0.000
+
+
+           Correlations
+              CEXPCON       CHOSPSIZ
+              ________      ________
+ CEXPCON        0.000
+ CHOSPSIZ       0.000         1.000
+
+
+UNIVARIATE SAMPLE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     STRESS                4.977      -0.446       1.000    0.10%       4.000      5.000      5.000
+            1000.000       0.958       0.258       7.000    3.30%       5.000      6.000
+     AGE                  43.005       0.026      23.000    2.80%      31.000     39.000     43.000
+            1000.000     144.855      -1.174      64.000    3.00%      47.000     56.000
+     GENDER                0.735      -1.065       0.000   26.50%       0.000      1.000      1.000
+            1000.000       0.195      -0.866       1.000   73.50%       1.000      1.000
+     EXPERIEN             17.057       0.034       1.000    0.20%      11.000     15.000     17.000
+            1000.000      36.472      -0.389      38.000    0.10%      20.000     22.000
+     WARDTYPE              0.500       0.000       0.000   50.00%       0.000      0.000      0.500
+             100.000       0.250      -2.000       1.000   50.00%       1.000      1.000
+     CEXPCON               0.000       0.000      -0.500   50.00%      -0.500     -0.500      0.000
+             100.000       0.250      -2.000       0.500   50.00%       0.500      0.500
+     CHOSPSIZE            -0.200       0.289      -1.000   36.00%      -1.000      0.000      0.000
+              25.000       0.480      -0.917       1.000   16.00%       0.000      0.000
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       12
+
+Loglikelihood
+
+          H0 Value                        -776.018
+          H0 Scaling Correction Factor      1.0324
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                    1576.036
+          Bayesian (BIC)                  1634.929
+          Sample-Size Adjusted BIC        1596.817
+            (n* = (n + 2) / 24)
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ STRESS     ON
+    AGE                0.022      0.002     11.944      0.000
+    GENDER            -0.455      0.032    -14.438      0.000
+    EXPERIEN          -0.062      0.004    -15.320      0.000
+
+ Residual Variances
+    STRESS             0.217      0.011     20.097      0.000
+
+Between WARDID Level
+
+ STRESS     ON
+    WARDTYPE           0.053      0.076      0.695      0.487
+
+ Residual Variances
+    STRESS             0.109      0.033      3.298      0.001
+
+Between HOSPITAL Level
+
+ EXPSLOPE   ON
+    CHOSPSIZE          0.999      0.191      5.220      0.000
+
+ STRESS     ON
+    CHOSPSIZE          0.458      0.123      3.717      0.000
+
+ Intercepts
+    STRESS             5.495      0.095     58.076      0.000
+    EXPSLOPE          -0.499      0.138     -3.611      0.000
+
+ Residual Variances
+    STRESS             0.152      0.051      2.984      0.003
+    EXPSLOPE           0.179      0.087      2.061      0.039
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.809E-05
+       (ratio of smallest to largest eigenvalue)
+
+
+CONFIDENCE INTERVALS OF MODEL RESULTS
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+Within Level
+
+ STRESS   ON
+    AGE              0.017       0.019       0.019       0.022       0.025       0.026       0.027
+    GENDER          -0.536      -0.517      -0.507      -0.455      -0.403      -0.393      -0.374
+    EXPERIEN        -0.072      -0.070      -0.068      -0.062      -0.055      -0.054      -0.051
+
+ Residual Variances
+    STRESS           0.189       0.195       0.199       0.217       0.234       0.238       0.244
+
+Between WARDID Level
+
+ STRESS   ON
+    WARDTYPE        -0.144      -0.097      -0.073       0.053       0.179       0.203       0.250
+
+ Residual Variances
+    STRESS           0.024       0.044       0.054       0.109       0.163       0.173       0.194
+
+Between HOSPITAL Level
+
+ EXPSLOPE ON
+    CHOSPSIZE        0.506       0.624       0.684       0.999       1.313       1.374       1.491
+
+ STRESS   ON
+    CHOSPSIZE        0.141       0.217       0.255       0.458       0.661       0.700       0.776
+
+ Intercepts
+    STRESS           5.251       5.309       5.339       5.495       5.651       5.680       5.739
+    EXPSLOPE        -0.855      -0.770      -0.727      -0.499      -0.272      -0.228      -0.143
+
+ Residual Variances
+    STRESS           0.021       0.052       0.068       0.152       0.235       0.251       0.283
+    EXPSLOPE        -0.045       0.009       0.036       0.179       0.321       0.348       0.402
+
+
+DIAGRAM INFORMATION
+
+  Mplus diagrams are currently not available for multilevel analysis.
+  No diagram output was produced.
+
+
+     Beginning Time:  16:08:51
+        Ending Time:  16:08:52
+       Elapsed Time:  00:00:01
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2017 Muthen & Muthen

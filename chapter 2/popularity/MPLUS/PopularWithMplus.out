@@ -1,0 +1,310 @@
+Mplus VERSION 8
+MUTHEN & MUTHEN
+10/25/2017   5:14 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE:  Popularity data using Mplus, model without cross-level interaction
+  ! Note Mplus 8 will issue two warnings that can be ignored;
+
+  DATA:   FILE IS "popular2.dat";
+
+  VARIABLE:
+    NAMES ARE class pupil cons extrav sex texp popular popteach zextrav
+    zsex ztexp zpopular zpoptch;
+    USEVARIABLES ARE extrav sex texp popular class;
+    CLUSTER IS class;
+    WITHIN ARE extrav sex;
+    BETWEEN ARE texp;
+
+  ANALYSIS:
+    TYPE IS TWOLEVEL RANDOM;
+    ESTIMATOR IS MLR;
+
+  MODEL:
+    %within%
+    popular on sex;
+    slope | popular on extrav;
+    %between%
+    popular on texp;
+    slope;
+  !  slope on texp; ! No cross-level interaction;
+
+  OUTPUT:  SAMPSTAT STANDARDIZED CINTERVAL;
+
+
+
+*** WARNING
+  One or more individual-level variables have no variation within a
+  cluster for the following clusters.
+
+     Variable   Cluster IDs with no within-cluster variation
+
+      SEX         75 14 64 33 53 40 35 67 82 55 97 85
+
+*** WARNING in OUTPUT command
+  STANDARDIZED (STD, STDY, STDYX) options are available only for TYPE=TWOLEVEL RANDOM
+  with ESTIMATOR=BAYES.  Request for STANDARDIZED (STD, STDY, STDYX) is ignored.
+   2 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+Popularity data using Mplus, model without cross-level interaction
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        2000
+
+Number of dependent variables                                    1
+Number of independent variables                                  3
+Number of continuous latent variables                            1
+
+Observed dependent variables
+
+  Continuous
+   POPULAR
+
+Observed independent variables
+   EXTRAV      SEX         TEXP
+
+Continuous latent variables
+   SLOPE
+
+Variables with special functions
+
+  Cluster variable      CLASS
+
+  Within variables
+   EXTRAV      SEX
+
+  Between variables
+   TEXP
+
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Maximum number of iterations                                   100
+Convergence criterion                                    0.100D-05
+Maximum number of EM iterations                                500
+Convergence criteria for the EM algorithm
+  Loglikelihood change                                   0.100D-02
+  Relative loglikelihood change                          0.100D-05
+  Derivative                                             0.100D-03
+Minimum variance                                         0.100D-03
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+
+Input data file(s)
+  popular2.dat
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of clusters                        100
+
+     Average cluster size       20.000
+
+     Estimated Intraclass Correlations for the Y Variables
+
+                Intraclass              Intraclass
+     Variable  Correlation   Variable  Correlation
+
+     POPULAR      0.313
+
+
+
+SAMPLE STATISTICS
+
+NOTE:  The sample statistics for within and between refer to the
+       maximum-likelihood estimated within and between covariance
+       matrices, respectively.
+
+
+     ESTIMATED SAMPLE STATISTICS FOR WITHIN
+
+
+           Means
+              POPULAR       EXTRAV        SEX           TEXP
+              ________      ________      ________      ________
+                0.000         5.215         0.505         0.000
+
+
+           Covariances
+              POPULAR       EXTRAV        SEX           TEXP
+              ________      ________      ________      ________
+ POPULAR        1.378
+ EXTRAV         0.794         1.593
+ SEX            0.339         0.056         0.250
+ TEXP           0.000         0.000         0.000         0.000
+
+
+           Correlations
+              POPULAR       EXTRAV        SEX           TEXP
+              ________      ________      ________      ________
+ POPULAR        1.000
+ EXTRAV         0.536         1.000
+ SEX            0.578         0.089         1.000
+ TEXP           0.000         0.000         0.000         0.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR BETWEEN
+
+
+           Means
+              POPULAR       EXTRAV        SEX           TEXP
+              ________      ________      ________      ________
+                5.078         0.000         0.000        14.300
+
+
+           Covariances
+              POPULAR       EXTRAV        SEX           TEXP
+              ________      ________      ________      ________
+ POPULAR        0.627
+ EXTRAV         0.000         0.000
+ SEX            0.000         0.000         0.000
+ TEXP           3.822         0.000         0.000        43.230
+
+
+           Correlations
+              POPULAR       EXTRAV        SEX           TEXP
+              ________      ________      ________      ________
+ POPULAR        1.000
+ EXTRAV         0.000         0.000
+ SEX            0.000         0.000         0.000
+ TEXP           0.734         0.000         0.000         1.000
+
+
+UNIVARIATE SAMPLE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     POPULAR               5.076      -0.049       0.000    0.05%       3.900      4.700      5.100
+            2000.000       1.910      -0.060       9.500    0.05%       5.400      6.300
+     EXTRAV                5.215       0.374       1.000    0.15%       4.000      5.000      5.000
+            2000.000       1.593       0.667      10.000    0.30%       5.000      6.000
+     SEX                   0.505      -0.022       0.000   49.45%       0.000      0.000      1.000
+            2000.000       0.250      -2.000       1.000   50.55%       1.000      1.000
+     TEXP                 14.300      -0.149       2.000    3.00%       8.000     13.000     15.000
+             100.000      43.230      -1.039      25.000    5.00%      16.000     21.000
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                        7
+
+Loglikelihood
+
+          H0 Value                       -2425.976
+          H0 Scaling Correction Factor      1.2450
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                    4865.953
+          Bayesian (BIC)                  4905.159
+          Sample-Size Adjusted BIC        4882.920
+            (n* = (n + 2) / 24)
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ POPULAR    ON
+    SEX                1.254      0.036     35.136      0.000
+
+ Residual Variances
+    POPULAR            0.578      0.021     27.993      0.000
+
+Between Level
+
+ POPULAR    ON
+    TEXP               0.118      0.015      7.944      0.000
+
+ Means
+    SLOPE              0.453      0.025     18.280      0.000
+
+ Intercepts
+    POPULAR            0.380      0.280      1.359      0.174
+
+ Variances
+    SLOPE              0.006      0.003      2.126      0.034
+
+ Residual Variances
+    POPULAR            0.193      0.062      3.105      0.002
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.259E-03
+       (ratio of smallest to largest eigenvalue)
+
+
+CONFIDENCE INTERVALS OF MODEL RESULTS
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+Within Level
+
+ POPULAR  ON
+    SEX              1.162       1.184       1.195       1.254       1.313       1.324       1.346
+
+ Residual Variances
+    POPULAR          0.525       0.537       0.544       0.578       0.612       0.618       0.631
+
+Between Level
+
+ POPULAR  ON
+    TEXP             0.080       0.089       0.093       0.118       0.142       0.147       0.156
+
+ Means
+    SLOPE            0.389       0.404       0.412       0.453       0.493       0.501       0.516
+
+ Intercepts
+    POPULAR         -0.340      -0.168      -0.080       0.380       0.840       0.928       1.100
+
+ Variances
+    SLOPE           -0.001       0.000       0.001       0.006       0.011       0.012       0.014
+
+ Residual Variances
+    POPULAR          0.033       0.071       0.091       0.193       0.295       0.315       0.353
+
+
+DIAGRAM INFORMATION
+
+  Mplus diagrams are currently not available for multilevel analysis.
+  No diagram output was produced.
+
+
+     Beginning Time:  17:14:12
+        Ending Time:  17:14:12
+       Elapsed Time:  00:00:00
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2017 Muthen & Muthen

@@ -1,0 +1,25 @@
+TITLE: Tai education data using Mplus
+
+DATA: FILE IS "uthai1.dat";
+
+VARIABLE: 
+  NAMES ARE schoolid male pped rep1 msesc intercept;
+  USEVARIABLES ARE schoolid male pped rep1 msesc;
+  CLUSTER IS schoolid;
+  WITHIN ARE male pped;
+  BETWEEN ARE msesc;
+  CATEGORICAL ARE rep1;
+
+ANALYSIS:
+  TYPE IS TWOLEVEL RANDOM;
+  ESTIMATOR IS MLR;
+
+MODEL:
+    %WITHIN%
+    rep1 ON male pped;
+!slope | rep1 ON male;
+    %BETWEEN%
+    rep1 ON msesc;
+
+OUTPUT: sampstat cinterval;
+

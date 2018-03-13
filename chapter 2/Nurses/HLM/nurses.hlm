@@ -1,0 +1,33 @@
+#WHLM CMD FILE FOR D:\MLMbook\Book3\DataOwnUse\2 Basic Model\nurses.mdm
+nonlin:n
+numit:100
+stopval:0.0000010000
+level1:STRESS=INTRCPT1+AGE+GENDER+EXPERIEN+RANDOM
+level2:INTRCPT1=INTRCPT2+WARDTYPE+EXPCON,2+random/
+level3:INTRCPT2=INTRCPT3+HOSPSIZE,2+random/
+level3:WARDTYPE=INTRCPT3/
+level3:EXPCON=INTRCPT3+HOSPSIZE,2+random/
+level2:AGE=INTRCPT2/
+level3:INTRCPT2=INTRCPT3/
+level2:GENDER=INTRCPT2/
+level3:INTRCPT2=INTRCPT3/
+level2:EXPERIEN=INTRCPT2/
+level3:INTRCPT2=INTRCPT3/
+fixtau2:3
+fixtau3:3
+accel:5
+level1weight:none
+level2weight:none
+level3weight:none
+varianceknown:none
+hypoth:n
+resfil1:n
+resfil2:n
+resfil3:n
+constrain:N
+graphgammas:D:\MLMbook\Book3\DataOwnUse\2 Basic Model\grapheq.geq
+lvr-beta:n
+title:no title
+output:D:\MLMbook\Book3\DataOwnUse\2 Basic Model\hlm3.html
+fulloutput:n
+fishertype:2

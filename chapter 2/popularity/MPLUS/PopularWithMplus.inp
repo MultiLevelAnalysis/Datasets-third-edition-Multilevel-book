@@ -1,0 +1,27 @@
+TITLE:  Popularity data using Mplus, model without cross-level interaction
+! Note Mplus 8 will issue two warnings that can be ignored;
+
+DATA:   FILE IS "popular2.dat";
+
+VARIABLE:
+  NAMES ARE class pupil cons extrav sex texp popular popteach zextrav
+  zsex ztexp zpopular zpoptch;
+  USEVARIABLES ARE extrav sex texp popular class;
+  CLUSTER IS class;
+  WITHIN ARE extrav sex;
+  BETWEEN ARE texp;
+
+ANALYSIS:
+  TYPE IS TWOLEVEL RANDOM;
+  ESTIMATOR IS MLR;
+
+MODEL:
+  %within%
+  popular on sex;
+  slope | popular on extrav;
+  %between%
+  popular on texp;
+  slope;
+!  slope on texp; ! No cross-level interaction;
+
+OUTPUT:  SAMPSTAT STANDARDIZED CINTERVAL;

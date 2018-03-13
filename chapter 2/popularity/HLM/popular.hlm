@@ -1,0 +1,25 @@
+#WHLM CMD FILE FOR popular2.mdm
+nonlin:n
+numit:100
+stopval:0.0000010000
+level1:POPULAR=INTRCPT1+EXTRAV+SEX+RANDOM
+level2:INTRCPT1=INTRCPT2+TEXP+random/
+level2:EXTRAV=INTRCPT2+random/
+level2:SEX=INTRCPT2/
+fixtau:3
+lev1ols:10
+accel:5
+level1weight:none
+level2weight:none
+varianceknown:none
+hypoth:n
+resfil1:n
+resfil2:n
+homvar:n
+constrain:N
+heterol1var:n
+lvr:n
+title:no title
+output:D:\Dropbox\MLMbook\book2\New or Corrected Data\2 Basic Model\hlm2.html
+fulloutput:n
+mlf:y

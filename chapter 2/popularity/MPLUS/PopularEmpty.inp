@@ -1,0 +1,25 @@
+TITLE:  Popularity data using Mplus, empty model
+!   Note this setup will generate several errors/warnings that can be ignored;
+
+DATA:
+  FILE IS "popular2.dat";
+
+VARIABLE:
+  NAMES ARE class pupil cons extrav sex texp popular popteach zextrav
+  zsex ztexp zpopular zpoptch;
+  USEVARIABLES ARE extrav sex texp popular class;
+  CLUSTER IS class;
+  WITHIN ARE extrav sex;
+  BETWEEN ARE texp;
+
+ANALYSIS:
+  TYPE IS TWOLEVEL;
+  ESTIMATOR IS MLR;
+
+MODEL:
+  %within%
+
+  %between%
+
+
+OUTPUT:  SAMPSTAT STDYX; CINTERVAL;

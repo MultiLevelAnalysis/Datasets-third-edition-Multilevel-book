@@ -1,0 +1,19 @@
+#HLM2 MDM CREATION TEMPLATE
+vknown:n
+mdmtype:0
+rawdattype:spss
+l1fname:D:\Dropbox\MLMbook\book2\New or Corrected Data\2 Basic Model\popular2.sav
+l2fname:D:\Dropbox\MLMbook\book2\New or Corrected Data\2 Basic Model\popular2.sav
+l1missing:n
+timeofdeletion:now
+mdmname:popular2.mdm
+*begin l1vars
+level2id:CLASS
+  EXTRAV    
+     SEX    
+ POPULAR    
+*end l1vars
+*begin l2vars
+level2id:CLASS
+    TEXP    
+*end l2vars

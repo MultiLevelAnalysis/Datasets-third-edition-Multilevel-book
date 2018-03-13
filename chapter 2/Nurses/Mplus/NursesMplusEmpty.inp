@@ -1,0 +1,27 @@
+TITLE:  Popularity data using Mplus, empty model
+!   Note this setup will generate several errors/warnings that can be ignored;
+
+DATA:
+  FILE IS "nurses.dat";
+
+VARIABLE:
+  NAMES ARE hospital wardid nurse age gender experien stress wardtype hospsiz 
+            expcon Cexpcon Chospsize;
+  USEVARIABLES ARE hospital wardid age gender experien stress wardtype Cexpcon Chospsize;
+  CLUSTER IS hospital wardid;
+  WITHIN ARE experien gender;
+  BETWEEN ARE (wardid) cexpcon wardtype (hospital) chospsize;
+
+ANALYSIS:
+  TYPE IS THREELEVEL;
+  ESTIMATOR IS MLR; PROCESSORS=4;
+
+MODEL:
+  %within%
+
+  %between wardid%
+
+  %between hospital%
+
+
+OUTPUT:  SAMPSTAT STDYX; CINTERVAL;

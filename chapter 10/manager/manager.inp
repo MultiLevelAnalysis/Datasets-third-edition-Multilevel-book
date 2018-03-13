@@ -1,0 +1,29 @@
+TITLE:  Kruegerdata in Mplus, some exploratory analyses
+
+DATA:
+  FILE IS "kruegercombi.dat";
+
+VARIABLE:
+  NAMES ARE school pupil dirsex pupsex item1-item6;
+  USEVARIABLES ARE school dirsex pupsex item1-item6;
+  MISSING ARE item1-item6 (9);
+  CLUSTER IS school;
+  BETWEEN IS dirsex;
+  WITHIN IS pupsex;
+
+ANALYSIS:
+  TYPE IS TWOLEVEL;
+
+MODEL:
+%WITHIN%
+wstile BY item1-item6;
+item4 WITH item5; item2 WITH item6;
+wstile ON pupsex;
+pupsex;
+
+%BETWEEN%
+bstile BY item1-item6;
+item4 WITH item5; item2@0;
+bstile ON dirsex;
+
+OUTPUT:  SAMPSTAT STDYX MODINDICES;
